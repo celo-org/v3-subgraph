@@ -3,24 +3,38 @@
   "version": "1.0.0",
   "repository": "https://github.com/graphprotocol/uniswap-v3-subgraph",
   "license": "GPL-3.0-or-later",
+  "files": [
+    "src",
+    "subgraph.yaml",
+    "schema.graphql",
+    "deployment.json"
+  ],
   "scripts": {
     "codegen": "graph codegen --output-dir src/types/",
     "build": "graph build",
-    "create-local": "graph create ianlapham/uniswap-v3 --node http://127.0.0.1:8020",
-    "deploy-local": "graph deploy ianlapham/uniswap-v3 --debug --ipfs http://localhost:5001 --node http://127.0.0.1:8020",
-    "deploy": "graph deploy ianlapham/uniswap-v3-subgraph --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/ --debug",
-    "deploy-dev": "graph deploy sommelier/uniswap-v3 --ipfs http://35.197.14.14:5000/ --node http://35.197.14.14:8020/ --debug",
+    "create-local": "graph create celo/uniswap-v3 --node http://127.0.0.1:8020",
+    "deploy-local": "graph deploy celo/uniswap-v3 --ipfs http://localhost:5001 --node http://127.0.0.1:8020",
+    "create": "graph create --node https://graph-admin:iKu4Lg8i5x7JY@graph-node.admin.mainnet.celo-testnet.org/ celo/uniswap-v3-subgraph",
+    "deploy": "graph deploy celo/uniswap-v3-subgraph --ipfs https://ipfs.api.mainnet.celo-testnet.org/ --node https://graph-admin:iKu4Lg8i5x7JY@graph-node.admin.mainnet.celo-testnet.org/",
+    "deploy-dev": "graph deploy sommelier/uniswap-v3 --ipfs http://35.197.14.14:5000/ --node http://35.197.14.14:8020/",
     "deploy-staging": "graph deploy $THE_GRAPH_GITHUB_USER/$THE_GRAPH_SUBGRAPH_NAME /Uniswap --ipfs https://api.staging.thegraph.com/ipfs/ --node https://api.staging.thegraph.com/deploy/",
-    "watch-local": "graph deploy ianlapham/uniswap-v3 --watch --debug --node http://127.0.0.1:8020/ --ipfs http://localhost:5001"
+    "watch-local": "graph deploy celo/uniswap-v3 --watch --node http://127.0.0.1:8020/ --ipfs http://localhost:5001"
   },
   "devDependencies": {
-    "@graphprotocol/graph-cli": "^0.64.1",
-    "@graphprotocol/graph-ts": "^0.32.0",
-    "@typescript-eslint/eslint-plugin": "^2.0.0",
-    "@typescript-eslint/parser": "^2.0.0",
-    "eslint": "^6.2.2",
-    "eslint-config-prettier": "^6.1.0",
-    "prettier": "^1.18.2",
-    "typescript": "^3.5.2"
+    "@graphprotocol/contracts": "6.2.0",
+    "@graphprotocol/graph-cli": "0.68.0",
+    "@graphprotocol/graph-ts": "0.32.0",
+    "@types/node": "^14.0.13",
+    "@typescript-eslint/eslint-plugin": "^3.3.0",
+    "@typescript-eslint/parser": "^3.3.0",
+    "eslint": "^7.2.0",
+    "matchstick-as": "0.6.0-beta.2",
+    "mustache": "^4.0.1",
+    "prettier": "^2.0.5",
+    "typescript": "^3.9.3"
+  },
+  "dependencies": {
+    "dotenv-cli": "^7.4.1",
+    "ts-node": "^10.9.2"
   }
 }
