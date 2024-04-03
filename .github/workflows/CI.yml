@@ -61,5 +61,5 @@ jobs:
         run: yarn graph auth --product hosted-service $GRAPH_API_KEY
 
       - name: Deploy to Graph Hosted service
-        if: false
+        if: true
         run: yarn deploy-celo
