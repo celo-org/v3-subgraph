@@ -8,11 +8,13 @@ on:
   pull_request:
 
 jobs:
-  test:
+  build:
     strategy:
       matrix:
-        node: [ '18.x', '20.x' ]
-        os: [ ubuntu-latest ]
+        node:
+          - 20.x
+        os:
+          - ubuntu-latest
 
     runs-on: ${{ matrix.os }}
 
@@ -45,3 +47,18 @@ jobs:
 
       - name: Build project
         run: yarn build
+
+      - name: Get Graph Auth Token from Akeyless
+        uses:
+          docker://us-west1-docker.pkg.dev/devopsre/akeyless-public/akeyless-action:latest
+        with:
+          api-url: https://api.gateway.akeyless.celo-networks-dev.org
+          access-id: p-kf9vjzruht6l
+          static-secrets: '{"/static-secrets/partner-engineering-circle/thegraph-apikey":"GRAPH_API_KEY"}'
+
+      - name: Authenticate with theGraph hosted service
+        run: yarn graph auth --product hosted-service $GRAPH_API_KEY
+
+      - name: Deploy to Graph Hosted service
+        if: false
+        run: yarn deploy-celo
